@@ -1,9 +1,6 @@
 name: My Workflow
 
-on:
-  push:
-    branches:
-      - master
+on: [push,workflow_dispatch]
 
 jobs:
   test:
