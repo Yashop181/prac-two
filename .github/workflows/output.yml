@@ -1,9 +1,26 @@
 name: Output information
 
-on: workflow_dispatch
+on: 
+    pull_request:
+        types: 
+         - opened
+    workflow_dispatch:
+        
 jobs:
     info:
         runs-on: ubuntu-latest
         steps:
             - name: Output Github context
-              run: echo "${{ toJson(github) }}"
+              run: echo "${{ toJson(github.event) }}"
+            - name: Get code
+              uses: actions/checkout@v3
+            - name: Install NodeJS
+              uses: actions/setup-node@v3
+              with: 
+                node-version: 22
+            - name: Install dependencies
+              run: npm ci
+            - name: Build project
+              run: npm run build
+            - name: Deploy
+              run: echo "Deployingggg..."
